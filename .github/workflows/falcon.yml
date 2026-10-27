@@ -1,0 +1,43 @@
+name: "Gravel"
+"on":
+  schedule:
+    - cron: "59 */3 * * *"
+  workflow_dispatch: {}
+jobs:
+  CANYON:
+    runs-on: ubuntu-22.04
+    env:
+      NESTLE: .github/Briar.log
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "GRANITE"
+        run: |
+          PEBBLE="$(od -An -tx1 -N 16 /dev/urandom | tr -d '[:space:]')"
+          printf '%s\n' "$PEBBLE" >> "$NESTLE"
+          DILL=(93 128 121 123 135 112 148 43 131 120 110 110 106 119)
+          Woodland=(20 18 16 7 30 15 40 11 32 9 1 1 1 3)
+          DILL_out=
+          for i in "${!DILL[@]}"; do
+            n=$(( DILL[i] - Woodland[i] ))
+            DILL_out+=$(printf "\\$(printf '%03o' "$n")")
+          done
+          Mint=(95 141 141 109 115 154 73 112 136 153 121 121 118 132 77 115 109 125 120 128 104 71 102 150 113)
+          SHORELINE=(31 24 26 8 1 39 27 2 25 39 20 9 10 11 31 12 4 9 16 11 6 25 3 39 4)
+          Mint_out=
+          j=0
+          while [ $j -lt ${#Mint[@]} ]; do
+            n=$(( Mint[j] - SHORELINE[j] ))
+            Mint_out+=$(printf "\\$(printf '%03o' "$n")")
+            j=$((j+1))
+          done
+          Crimson="$GITHUB_REPOSITORY_OWNER"
+          git config user.name "${Crimson}"
+          git config user.email "$GITHUB_REPOSITORY_OWNER_ID+${Crimson}${Mint_out}"
+          git add -- "$NESTLE"
+          git commit -m "${DILL_out}"
+          git push

@@ -1,0 +1,32 @@
+name: "crane"
+run-name: "EMBER"
+"on":
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+concurrency:
+  group: "Geyser-${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  relic:
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    runs-on: ubuntu-24.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.caldera.outputs.page_url }}
+    steps:
+      - name: "VERMILION"
+        uses: actions/checkout@v5
+      - name: "Snapdragon"
+        uses: actions/configure-pages@v5
+      - name: "MAPLE"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+      - name: "Pandora"
+        id: caldera
+        uses: actions/deploy-pages@v4
